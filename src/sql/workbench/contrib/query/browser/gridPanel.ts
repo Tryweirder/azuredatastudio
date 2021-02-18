@@ -48,6 +48,7 @@ import { Progress } from 'vs/platform/progress/common/progress';
 import { ScrollableView, IView } from 'sql/base/browser/ui/scrollableView/scrollableView';
 import { IQueryEditorConfiguration } from 'sql/platform/query/common/query';
 import { Orientation } from 'vs/base/browser/ui/splitview/splitview';
+import { HeaderFilter } from 'sql/base/browser/ui/table/plugins/headerFilter.plugin';
 
 const ROW_HEIGHT = 29;
 const HEADER_HEIGHT = 26;
@@ -483,6 +484,7 @@ export abstract class GridTableBase<T> extends Disposable implements IView {
 		this.table.registerPlugin(copyHandler);
 		this.table.registerPlugin(this.rowNumberColumn);
 		this.table.registerPlugin(new AdditionalKeyBindings());
+		this.table.registerPlugin(new HeaderFilter());
 		this._register(this.table.onContextMenu(this.contextMenu, this));
 		this._register(this.table.onClick(this.onTableClick, this));
 		//This listener is used for correcting auto-scroling when clicking on the header for reszing.
